@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>أسعار منتجات بلبن | B Laban مصر</title>
+  <meta name="description" content="أحدث أسعار منيو بلبن المصري - أرز باللبن، قشطوطة، أم علي والمزيد بثيم كريمي جميل" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #FFF8F0;
+      --milk: #FFFAF5;
+      --soft-blue: #A8D5E5;
+      --deep-blue: #2C5F7C;
+      --gold: #D4A017;
+      --soft-pink: #F8E1E7;
+      --card-bg: rgba(255, 255, 255, 0.85);
+      --shadow: 0 10px 40px rgba(44, 95, 124, 0.12);
+      --radius: 20px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: linear-gradient(135deg, #FFF8F0 0%, #F0F7FA 40%, #FFF5F7 100%);
+      color: #2C3E50;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* ===== Milk Bubbles Animation ===== */
+    .bubbles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .bubble {
+      position: absolute;
+      bottom: -100px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(168,213,229,0.4));
+      border-radius: 50%;
+      animation: rise 12s infinite ease-in;
+      opacity: 0.6;
+    }
+
+    @keyframes rise {
+      0% { transform: translateY(0) scale(1); opacity: 0.5; }
+      50% { opacity: 0.8; }
+      100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
+    }
+
+    /* ===== Header ===== */
+    header {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 3rem 1.5rem 2rem;
+      background: linear-gradient(180deg, rgba(255,248,240,0.95) 0%, transparent 100%);
+    }
+
+    .logo {
+      font-size: clamp(2.8rem, 8vw, 4.5rem);
+      font-weight: 800;
+      background: linear-gradient(135deg, #2C5F7C, #5B9BB8, #D4A017);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -1px;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 4px 20px rgba(44,95,124,0.15);
+    }
+
+    .tagline {
+      font-size: 1.15rem;
+      color: #5A7A8A;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #A8D5E5, #7BB8D4);
+      color: #1A3A4A;
+      padding: 0.45rem 1.2rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      box-shadow: 0 4px 15px rgba(168,213,229,0.4);
+    }
+
+    /* ===== Navigation ===== */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 248, 240, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(168,213,229,0.3);
+      padding: 0.8rem 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #2C5F7C;
+      font-weight: 700;
+      padding: 0.5rem 1.1rem;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
+    }
+
+    nav a:hover, nav a.active {
+      background: linear-gradient(135deg, #A8D5E5, #7BB8D4);
+      color: #1A3A4A;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(168,213,229,0.4);
+    }
+
+    /* ===== Main Content ===== */
+    main {
+      position: relative;
+      z-index: 5;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1.2rem 4rem;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #2C5F7C;
+      margin: 2.5rem 0 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .section-title::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: #D4A017;
+      border-radius: 50%;
+      box-shadow: 0 0 0 4px rgba(212,160,23,0.25);
+    }
+
+    /* ===== Product Grid ===== */
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border: 1px solid rgba(255,255,255,0.8);
+      position: relative;
+    }
+
+    .card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 20px 50px rgba(44,95,124,0.18);
+    }
+
+    .card-img {
+      height: 180px;
+      background: linear-gradient(135deg, #E8F4F8, #FDF6F0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 70% 30%, rgba(255,255,255,0.5), transparent 60%);
+    }
+
+    .card-body {
+      padding: 1.3rem 1.4rem 1.5rem;
+    }
+
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #1A3A4A;
+      margin-bottom: 0.4rem;
+      line-height: 1.3;
+    }
+
+    .card-desc {
+      font-size: 0.88rem;
+      color: #6B7C8A;
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+
+    .price {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: linear-gradient(135deg, #2C5F7C, #3A7A9A);
+      color: white;
+      font-weight: 800;
+      font-size: 1.15rem;
+      padding: 0.45rem 1rem;
+      border-radius: 50px;
+      box-shadow: 0 4px 15px rgba(44,95,124,0.3);
+    }
+
+    .price small {
+      font-size: 0.75rem;
+      font-weight: 600;
+      opacity: 0.9;
+    }
+
+    /* ===== Special Banner ===== */
+    .banner {
+      background: linear-gradient(135deg, #2C5F7C, #3A7A9A, #5B9BB8);
+      color: white;
+      border-radius: var(--radius);
+      padding: 2rem 1.8rem;
+      margin: 2rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 15px 40px rgba(44,95,124,0.25);
+    }
+
+    .banner::before {
+      content: '🥛';
+      position: absolute;
+      font-size: 8rem;
+      opacity: 0.08;
+      top: -20px;
+      left: -20px;
+      transform: rotate(-15deg);
+    }
+
+    .banner h2 {
+      font-size: 1.6rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .banner p {
+      opacity: 0.9;
+      font-size: 1rem;
+    }
+
+    /* ===== Footer ===== */
+    footer {
+      text-align: center;
+      padding: 2.5rem 1rem;
+      color: #5A7A8A;
+      font-size: 0.9rem;
+      position: relative;
+      z-index: 5;
+    }
+
+    footer a {
+      color: #2C5F7C;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .note {
+      background: rgba(255, 243, 205, 0.7);
+      border: 1px solid #F0D78C;
+      border-radius: 12px;
+      padding: 1rem 1.3rem;
+      margin: 2rem 0;
+      font-size: 0.9rem;
+      color: #7A5C00;
+      line-height: 1.6;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .products {
+        grid-template-columns: 1fr;
+      }
+      nav {
+        gap: 0.4rem;
+      }
+      nav a {
+        padding: 0.4rem 0.9rem;
+        font-size: 0.85rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating Milk Bubbles -->
+  <div class="bubbles" id="bubbles"></div>
+
+  <header>
+    <div class="logo">بلبن</div>
+    <p class="tagline">أصل اللبن • حلويات كريمية 100%</p>
+    <span class="badge">أحدث الأسعار ≈ 2025-2026</span>
+  </header>
+
+  <nav>
+    <a href="#rice">أرز باللبن</a>
+    <a href="#omali">أم علي</a>
+    <a href="#qashtuta">قشطوطة</a>
+    <a href="#special">مميزات</a>
+    <a href="#retail">تجزئة</a>
+  </nav>
+
+  <main>
+    <div class="banner">
+      <h2>🥛 بلبن • كبير الحلو في الوطن العربي</h2>
+      <p>أكثر من 120 فرع في مصر + فروع في الخليج • منتجات ألبان طبيعية</p>
+    </div>
+
+    <div class="note">
+      ⚠️ الأسعار تقريبية وتتغير حسب الفرع والعروض. يُفضل التحقق من المنيو الرقمي الرسمي أو الفروع. الموقع غير رسمي.
+    </div>
+
+    <!-- ===== أرز باللبن ===== -->
+    <h2 class="section-title" id="rice">أرز باللبن</h2>
+    <div class="products">
+      <div class="card">
+        <div class="card-img">🍚</div>
+        <div class="card-body">
+          <h3 class="card-title">أرز باللبن سادة</h3>
+          <p class="card-desc">الأصلي الكريمي من لبن طبيعي 100%</p>
+          <div class="price">20 – 25 <small>جنيه</small></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img">🥜</div>
+        <div class="card-body">
+          <h3 class="card-title">أرز باللبن بالمكسرات</h3>
+          <p class="card-desc">مكسرات محمصة طازجة فوق الأرز الكريمي</p>
+          <div class="price">38 – 45 <small>جنيه</small></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img">🍪</div>
+        <div class="card-body">
+          <h3 class="card-title">أرز باللبن لوتس</h3>
+          <p class="card-desc">لوتس بلجيكي أصلي + صوص لوتس</p>
+          <div class="price">40 – 45 <small>جنيه</small></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img">🥭</div>
+        <div class="card-body">
+          <h3 class="card-title">أرز باللبن مانجو</h3>
+          <p class="card-desc">مانجو إسماعيلاوي فريش</p>
+          <div class="price">40 – 45 <small>جنيه</small></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img">🟢</div>
+        <div class="card-body">
+          <h3 class="card-title">أرز باللبن فستق</h3>
+          <p class="card-desc">فستق حلبي فاخر</p>
+          <div class="price">50 <small>جنيه</small></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img">🍦</div>
+        <div class="card-body">
+          <h3 class="card-title">دوبامين / سيروتونين</h3>
+          <p class="card-desc">أرز + آيس كريم + مكسرات / بسبوسة</p>
+          <div class="price">50 – 55 <small>جنيه</small></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img">💥</div>
+        <div class="card-body">
+          <h3 class="card-title">القنبلة / الجريمة / السعادة</h3>
+          <p class="card-desc">خلطات خاصة بقشطة وآيس ومكسرات</p>
+          <div class="price">55 – 70 <small>جنيه</small></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img">🔫</div>
+        <div class="card-body">
+          <h3 class="card-title">البندقية / كمين الشربيني</h3>
+          <p class="card-desc">أصناف خاصة مشهورة</p>
+          <div class="price">60 – 65 <small>جنيه</small></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== أم علي ===== -->
+    <h2 class="section-title" id="omali">أم علي</h2>
+    <div class="products">
+      <div class="card">
+        <div class="card-img">🥣</div>
+        <div class="card-body">
+          <h3 class="card-title">أم علي سادة / بالسمن البلدي</h3>
+          <p class="card-desc">الطعم التقليدي الأصيل</p>
+          <div class="price">30 <small>جنيه</small></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img">🥛</div>
+        <div class="card-body">
+          <h3 class="card-title">أم علي بالقشطة</h3>
+          <p class="card-desc">قشطة بلدي غنية</p>
+          <div class="price">45 <small>جنيه</small></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img">🥜</div>
+        <div class="card-body">
+          <h3 class="card-title">أم علي بالمكسرات والقشطة</h3>
+          <p class="card-desc">مكسرات + قشطة + سمن</p>
+          <div class="price">55 – 65 <small>جنيه</small></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img">✨</div>
+        <div class="card-body">
+          <h3 class="card-title">طاجن البركة</h3>
+          <p class="card-desc">الطاجن الخاص المميز</p>
+          <div class="price">65 <small>جنيه</small></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== قشطوطة ===== -->
+    <h2 class="section-title" id="qashtuta">قشطوطة & قشطوزة</h2>
+    <div class="products">
+      <div class="card">
+        <div class="card-img">🍫</div>
+        <div class="card-body">
+          <h3 class="card-title">قشطوزة نوتيلا</h3>
+          <p class="card-desc">النسخة الأشهر</p>
+          <div class="price">60 <small>جنيه</small></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img">🍪</div>
+        <div class="card-body">
+          <h3 class="card-title">قشطوزة لوتس</h3>
+          <p class="card-desc">لوتس بلجيكي فاخر</p>
+          <div class="price">75 <small>جنيه</small></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img">🟢</div>
+        <div class="card-body">
+          <h3 class="card-title">قشطوزة فستق</h3>
+          <p class="card-desc">فستق حلبي أصلي</p>
+          <div class="price">80 <small>جنيه</small></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img">🥭</div>
+        <div class="card-body">
+          <h3 class="card-title">قشطوزة مانجو</h3>
+          <p class="card-desc">مانجو فريش إسماعيلاوي</p>
+          <div class="price">70 <small>جنيه</small></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img">👑</div>
+        <div class="card-body">
+          <h3 class="card-title">قشطوطة سوبر لوكس</h3>
+          <p class="card-desc">لوتس + فستق + نوتيلا</p>
+          <div class="price">90 – 95 <small>جنيه</small></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img">🍰</div>
+        <div class="card-body">
+          <h3 class="card-title">سالانكاتيه (متنوعة)</h3>
+          <p class="card-desc">نوتيلا، لوتس، فستق، كيندر، ريد فيلفيت...</p>
+          <div class="price">70 – 95 <small>جنيه</small></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== مميزات ===== -->
+    <h2 class="section-title" id="special">أصناف مميزة أخرى</h2>
+    <div class="products">
+      <div class="card">
+        <div class="card-img">🧁</div>
+        <div class="card-body">
+          <h3 class="card-title">كشري بلبن</h3>
+          <p class="card-desc">نوتيلا / أوريو / مانجو / فستق</p>
+          <div class="price">40 – 70 <small>جنيه</small></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img">🍮</div>
+        <div class="card-body">
+          <h3 class="card-title">مهلبية / كنافة بالقشطة</h3>
+          <p class="card-desc">كلاسيكيات شرقية</p>
+          <div class="price">35 – 50 <small>جنيه</small></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img">🎂</div>
+        <div class="card-body">
+          <h3 class="card-title">كيكة الهبة / الكشخة</h3>
+          <p class="card-desc">من أشهر الاختراعات</p>
+          <div class="price">حسب الحجم</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img">🍨</div>
+        <div class="card-body">
+          <h3 class="card-title">لهاليبو / آيس كريم</h3>
+          <p class="card-desc">نكهات متعددة</p>
+          <div class="price">30 – 45 <small>جنيه</small></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== تجزئة ===== -->
+    <h2 class="section-title" id="retail">منتجات التجزئة (في السوبرماركت)</h2>
+    <div class="products">
+      <div class="card">
+        <div class="card-img">🍫</div>
+        <div class="card-body">
+          <h3 class="card-title">شوكولاتة بلبن</h3>
+          <p class="card-desc">قطع 2 و 8 + سبريد</p>
+          <div class="price">متوفر في الماركت</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img">🥖</div>
+        <div class="card-body">
+          <h3 class="card-title">بسكويت / خبز محشو</h3>
+          <p class="card-desc">نوتيلا، لوتس، فستق، كيندر</p>
+          <div class="price">متوفر في الماركت</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img">🥛</div>
+        <div class="card-body">
+          <h3 class="card-title">منتجات ألبان معلبة</h3>
+          <p class="card-desc">الشركة أطلقت خط تجزئة جديد</p>
+          <div class="price">حسب المنتج</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top: 3rem;">
+      📌 <strong>مصادر الأسعار:</strong> منيو الفروع والمنصات العامة (2025-2026). الأسعار قد تختلف بين المحافظات والفروع.<br>
+      🔗 المنيو الرقمي الرسمي غالباً عبر QR في الفروع أو صفحات بلبن على فيسبوك وإنستجرام.
+    </div>
+  </main>
+
+  <footer>
+    <p>موقع غير رسمي لأسعار بلبن • صُمم بحب 💙</p>
+    <p style="margin-top: 0.5rem;">للاستضافة الدائمة: ارفع الملف على <a href="https://app.netlify.com/drop" target="_blank">Netlify Drop</a> مجاناً</p>
+  </footer>
+
+  <script>
+    // Create floating milk bubbles
+    const bubblesContainer = document.getElementById('bubbles');
+    for (let i = 0; i < 18; i++) {
+      const bubble = document.createElement('div');
+      bubble.classList.add('bubble');
+      const size = Math.random() * 40 + 15;
+      bubble.style.width = size + 'px';
+      bubble.style.height = size + 'px';
+      bubble.style.left = Math.random() * 100 + '%';
+      bubble.style.animationDuration = (Math.random() * 10 + 8) + 's';
+      bubble.style.animationDelay = Math.random() * 8 + 's';
+      bubblesContainer.appendChild(bubble);
+    }
+
+    // Smooth scroll for nav
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
